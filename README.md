@@ -2,45 +2,71 @@
 
 ## Overview
 
-This project implements a Retrieval-Augmented Generation (RAG) system using Python, ChromaDB, and Google Gemini. The system ingests multiple PDF documents, generates embeddings, stores them in a vector database, and answers user questions using only retrieved document context.
+This project implements a Retrieval-Augmented Generation (RAG) system using Python, ChromaDB, and Google Gemini.
+
+The system ingests multiple PDF documents, converts them into searchable vector embeddings, stores them in ChromaDB, retrieves relevant chunks based on user questions, and generates grounded answers using Gemini.
 
 ## Architecture
 
-PDF Documents → Text Extraction → Chunking → Embeddings → ChromaDB
+```text
+PDF Documents
+      ↓
+Text Extraction
+      ↓
+Chunking
+      ↓
+Vector Embeddings
+      ↓
+ChromaDB Storage
 
-User Query → Query Embedding → Similarity Search → Context Retrieval → Gemini → Answer + Citations
+User Question
+      ↓
+Similarity Search
+      ↓
+Relevant Chunks
+      ↓
+Gemini
+      ↓
+Answer + Citations
+```
 
 ## Tech Stack
 
 * Python 3.11
-* ChromaDB
 * Google Gemini API
-* PyPDF2
+* ChromaDB
+* PyPDF
 * python-dotenv
+
+## Documents Indexed
+
+* Python Documentation
+* AWS Well-Architected Framework
+* NIST AI Risk Management Framework
+* React Documentation
+* .NET Microservices Architecture Guide
+* Resume PDF
 
 ## Chunking Strategy
 
 * Chunk Size: 1000 characters
 * Overlap: 200 characters
-* Recursive text splitting approach
+* Page-level extraction followed by chunking
 
-## Embedding Model
+## Embedding and Retrieval
 
-* Gemini Embedding Model
-* Vector Dimension: 3072
-
-## Vector Database
-
-* ChromaDB
-* Persistent local storage
+* Embedding Model: Gemini Embedding Model
+* Vector Database: ChromaDB
+* Retrieval Method: Top-K Semantic Search
 
 ## Features
 
 * Multi-document PDF ingestion
+* Metadata storage (source and page number)
 * Semantic search
 * Source citations
-* Interactive CLI querying
-* Hallucination reduction through context grounding
+* Interactive CLI interface
+* Hallucination reduction using grounded context
 
 ## Installation
 
@@ -51,16 +77,18 @@ pip install -r requirements.txt
 Create a `.env` file:
 
 ```env
-GOOGLE_API_KEY=your_api_key_here
+GEMINI_API_KEY=your_api_key_here
 ```
 
-Run ingestion:
+## Usage
+
+### Index Documents
 
 ```bash
 python src/ingest.py
 ```
 
-Run query interface:
+### Query Documents
 
 ```bash
 python src/query.py
@@ -70,10 +98,14 @@ python src/query.py
 
 * What are microservices?
 * What is trustworthy AI?
-* What are the AWS Well-Architected pillars?
+* What are the pillars of AWS Well-Architected Framework?
+* What does the Python calendar module do?
 
 ## Limitations
 
-* PDF text extraction quality depends on document structure.
-* No OCR support for scanned PDFs.
-* Retrieval quality depends on chunking configuration.
+* No OCR support for scanned PDFs
+* Retrieval quality depends on chunking strategy
+* Optimized for PDF-based document collections
+
+```
+```
